@@ -1,0 +1,129 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>Getting Started Extension's Popup</title>
+    <style>
+      body {
+        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-size: 100%;
+        width: 400px;
+        height: 400px;
+        background: #333 url('background-mini.jpg') no-repeat;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      .starRating:not(old){
+        display        : inline-block;
+        width          : 7.5em;
+        height         : 1.5em;
+        overflow       : hidden;
+        vertical-align : bottom;
+      }
+      .starRating:not(old) > input{
+        margin-right : -100%;
+        opacity      : 0;
+      }
+      .starRating:not(old) > label{
+        display         : block;
+        float           : right;
+        position        : relative;
+        background      : url('star-off.svg');
+        background-size : contain;
+      }
+
+      .starRating:not(old) > label:before{
+        content         : '';
+        display         : block;
+        width           : 1.5em;
+        height          : 1.5em;
+        background      : url('star-on.svg');
+        background-size : contain;
+        opacity         : 0;
+        transition      : opacity 0.2s linear;
+      }
+
+      .starRating:not(old) > label:hover:before,
+      .starRating:not(old) > label:hover ~ label:before,
+      .starRating:not(:hover) > :checked ~ label:before{
+        opacity : 1;
+      }
+
+      .choice {
+        padding: 5px;
+      }
+
+      textarea {
+        display: block;
+        margin-bottom: 5px;
+        width: 200px;
+        height: 50px;
+      }
+
+      button {
+        margin: 5px;
+        display: block;
+      }
+
+      #inputDictionary  {
+        margin: 5px;
+        display: block; 
+      }
+
+      .line {
+        border-bottom: 1px solid #d3d3d3;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+    </style>
+
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+     -->
+    <script src="popup.js"></script>
+    <script src="jquery-1.11.3.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+  </head>
+  <body>
+    <span class="starRating">
+      <input id="rating5" type="radio" name="rating" value="5">
+      <label for="rating5">5</label>
+      <input id="rating4" type="radio" name="rating" value="4">
+      <label for="rating4">4</label>
+      <input id="rating3" type="radio" name="rating" value="3">
+      <label for="rating3">3</label>
+      <input id="rating2" type="radio" name="rating" value="2">
+      <label for="rating2">2</label>
+      <input id="rating1" type="radio" name="rating" value="1">
+      <label for="rating1">1</label>
+    </span>
+
+    <div class="choice">Choose a rating</div>
+
+    <textarea id="comment"></textarea>
+    <button id="submitFeedback">Submit</button>
+    <div class="line"></div>
+
+    <button id="bookmarkButton">Bookmark Console</button>
+    <div class="line"></div>
+
+    <div>Dictionary</div>
+    <input id="inputDictionary" type="text" />
+    <div class="line"></div>
+
+    <div>Resources here</div>
+    <div class="line"></div>
+
+    <div>Language option</div>
+    <!-- <div id="status"></div> -->
+    <!-- <img id="image-result" hidden> -->
+  </body>
+</html>
